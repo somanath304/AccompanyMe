@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	
+  <title>app2</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+	<meta charset="utf-8">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script language="javascript" type="text/javascript">  
+
+	$(document).ready(function(){
+	
+	//let's create arrays
+	var sports = [
+		{display: "Ping-Pong", value: "Ping-Pong" }, 
+		{display: "Badminton", value: "Badminton" }, 
+		{display: "Tennis", value: "Tennis" },
+		{display: "Carrom", value: "Carrom" }];
+		
+	var Entertainment = [
+		{display: "Movie", value: "Movie" }, 
+		{display: "Clubing", value: "Clubing" }, 
+		{display: "Food", value: "Food" }];
+		
+	//If parent option is changed
+	$("#parent_selection").change(function() {
+			var parent = $(this).val(); //get option value from parent 
+			
+			switch(parent){ //using switch compare selected option and populate child
+				  case 'sports':
+					 list(sports);
+					break;
+				  case 'Entertainment':
+					 list(Entertainment);
+					break;				
+				//   case 'icecreams':
+				// 	 list(icecreams);
+				// 	break;	
+				default: //default child option is blank
+					$("#child_selection").html('');	 
+					break;
+			   }
+	});
+	
+	//function to populate child select box
+	function list(array_list)
+	{
+		$("#child_selection").html(""); //reset child options
+		$(array_list).each(function (i) { //populate child options 
+			$("#child_selection").append("<option value=\""+array_list[i].value+"\">"+array_list[i].display+"</option>");
+		});
+	}
+	
+	});
+</script>
+
+<style>
+	.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+	
+    color:#47476b;
+    padding: 1px;
+    background-image: url("/grey2.jpg");
+    color: white;
+    text-align: center;
+  }
+	 .para-image{
+  background-image: url("/hands.jpg");
+  
+  font-size: 50px;
+  color:#4d4d99;
+    padding: 40px;
+
+
+}
+.para{
+  
+  
+  font-size: 20px;
+  color:#010111;
+    padding: 40px;
+
+
+}  
+</style>
+
+</head>
+
+<body style="background-color:#e6e4e4">
+
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">AccompanyME</a>
+    </div>
+    <ul class="nav navbar-nav">
+      
+      <li class="active"><a href="/home">Home</a></li>
+	  <li class="active"><a href="/about">About</a></li>  
+     
+	</ul>
+	<ul class="nav navbar-nav navbar-right">
+			<li ><a href="/">Logout</a></li>
+	</ul>
+  </div>
+</nav>
+<br>
+<h3 class="para-image" align="center" style="color:black;">Select Your Interest for which you are searching for companion</h3><br>
+
+	<form class="appjs" method="POST" action="SubmitRequest"><br>
+		<div>
+			<h3><p align="center">Click Checkbox to you use your location   <input type="checkbox" id="myCheck" onclick="getLocation()"></p></h3>
+			<input type="hidden" name="latiii" id="lati" readonly="readonly" />
+			<input type="hidden" name="longiii" id="lngi" readonly="readonly" />
+		</div>
+
+		<div>
+			<div >
+					<h3><p align="center" class="para">Category : <select class="checkbox-inline" name="category" id="parent_selection" ></p></h3>
+					<option value="">-- Please Select --</option>
+						<option value="sports">Sports</option>
+						<option value="Entertainment">Entertainment</option>
+					</select><br>
+					<br>
+					<label class="para" style=" font-weight:normal;">Sub Category:</label>
+					<select align="center" name="subcategory" id="child_selection">
+					</select>
+					</div>
+			
+
+		</div>
+
+		<div >
+		<h2><p align="center" style="color:black;">	<button class="unoneapp" align="center" style="color:rgb(250, 248, 248);" size="10px" >Submit Request</button></p></h2>
+		</div>
+
+	</form><br><br>
+
+	<div class="footer">
+            <h5><p align="left">AccompanyME</p></h5>
+          </div>
+
+
+</body>
+
+
+
+ <script> 
+
+
+
+	function getLocation() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showPosition);
+		} else {
+			x.innerHTML = "Geolocation is not supported by this browser.";
+		}
+	}
+
+	function showPosition(position) {
+		var lati = position.coords.latitude;
+		var lngi = position.coords.longitude;
+		console.log(lati);
+		console.log(lngi);
+		document.getElementById("lati").value = position.coords.latitude;
+		// document.getElementById("lngi").innerHTML = position.coords.longitude;			
+		document.getElementById("lngi").value = position.coords.longitude;
+		// document.getElementById("location").innerHTML =
+		// 			"Latitude: " + position.coords.latitude + "<br>" +
+		// 			"Longitude: " + position.coords.longitude;
+
+		// document.getElementById("location").innerHTML =
+		// 			"Latitude: " + position.coords.latitude + "<br>" +
+		// 			"Longitude: " + position.coords.longitude;						
+		// alert("lat:" + lat + " lng:" + lng);
+
+		//console.log("lat:" + lat + " lng:" + lng);
+	}
+
+
+</script>
+
+<html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <meta charset="utf-8">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+  
+  
+</head>
+<!-- 
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script> -->
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script>
+
+
+  $(document).ready(() => {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log("Hey Chinmay");
+    $('#partialOne').hide();
+    $('#SignupDiv').hide();
+    $('#verify').click(() => {
+      const abc = $('#email').val();
+      console.log(abc);
+      $.ajax({
+        url: 'signup',
+        data: { 'emailid': abc },
+        type: 'POST',
+        dataType: "text",
+       
+         success: (data) => {
+          $("#partialOne").toggle();
+          alert(data);
+         },
+         error: (data)=>{
+           alert("This is not a authorized GWU user or the user is already registered");
+         }
+      });
+        var inputOne = $("#email");
+        var inputTwo = $("#emailid");
+        inputTwo.val(inputOne.val());
+    });
+    $('#OTPButton').click(() => {
+      const email = $('#email').val();
+      const otp = $('#OTPid').val();
+      console.log('email is' + email);
+      console.log('otp' + otp)
+      $.ajax({
+        url: 'VerifyOTP',
+        data: {
+          'otp': otp,
+          'email': email
+        },
+        type: 'POST',
+        dataType: "text",
+        success: (data) => {
+          $("#SignupDiv").toggle();
+          alert(data);
+        },
+        error: (data)=>{
+           alert("Invalid OTP please try again");
+         }
+      });
+    });
+  });
+
+  var check = function() {
+  if (document.getElementById('pass').value ==
+    document.getElementById('password').value) {
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'matching';
+  } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'not matching';
+  }
+}
+</script>
+<body background="/hands.jpg">
+
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">AccompanyME</a>
+            </div>
+            <ul class="nav navbar-nav">
+
+                <li class="active"><a href="/">Home</a></li>
+                <li class="active"><a href="/about">About</a></li>
+
+
+
+            </ul>
+        </div>
+    </nav>
+    <div class="geeks" align="center">  
+
+
+  <div >
+      <br>
+    <h1><p align="center"><label align="center">Sign Up</label></p></h1>
+    <br>
+    <p align="center"><input type="text" id="email" name="uname" placeholder="Email" size="34"></p>
+    <h2><p align="center"><button id="verify" class="btn btn-outline-secondary btn-rounded waves-effect" >Submit</button></p><h2>
+      <br>
+    </div>
+
+
+    <div id='partialOne'>
+        <p align="center"><input align="center" name="otp" id="OTPid" placeholder="Enter OTP" size="34"></p>
+        <!--<input class="un " input type="text" align="center" placeholder="Username" name="uname">-->
+       <p align="center"> <button  align="center" id="OTPButton">Submit OTP</button> </p>
+  <br>
+    
+  </div>
+<form id="SignupDiv" action="MainSignup" method="POST" align="center">
+   <p align="center">  <input  align="center" name="emailid" id="emailid" readonly size="50" placeholder="Enter your Password" size="34"> <br> </p>
+   <p align="center"><input align="center" type="password" name="pass" id="pass" placeholder="Enter your Password" size="50"> <br></p>
+   <p align="center"><input align="center" type="password" name="password" id="password" placeholder="Re-Enter your password" onkeyup='check();' size="50"> <span id='message'></span> <br></p>
+   <p align="center"><input  align="center" name="fname" id="fname" placeholder="Enter your first Name" size="50"> <br></p>
+   <p align="center"><input  align="center" name="lname" id="lname" placeholder="Enter your Last Name" size="50"> <br></p>
+   <p align="center"><input align="center" name="address" id="address" placeholder="Enter your Address" size="50"> <br></p>
+   <p align="center"><input align="center" name="phone" id="phone" placeholder="Enter your contact number" size="50"><br></p><br>
+<h2><p align="center"> <button align="center" id="OTPButton">Sign up</button></p></h2>
+  
+<br>
+
+</form>
+
+</div>
+
+  <!-- <div class="main">
+    
+    <label class="control-label" for="email">E-mail</label>
+    <div class="controls">
+      <input type="text" id="email" name="uname" placeholder="" class="input-xlarge">
+      <p class="help-block">Please provide your E-mail</p>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="btn btn-success" id="verify">Submit</button>
+  </div>
+
+  <label class="control-label" for="otp">OTP</label>
+  <div class="controls">
+    <input type="text" name="otp" id="OTPid" placeholder="Enter the OTP" class="input-xlarge">
+  </div>
+  <div class="controls">
+    <button class="btn btn-success" id="OTPButton">Submit OTP</button>
+  </div> -->
+  <div class="footer">
+      <h5><p align="left">AccompanyME</p></h5>
+    </div>
+
+
+
+</body>
+
+</html>

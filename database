@@ -1,0 +1,11 @@
+create  database ASPProject;
+
+Create table event ( emailid VARCHAR(255) PRIMARY KEY, lat float( 10, 6 ) NOT NULL, lng float( 10, 6 ) not null,
+category varchar(255) not null, subcategory  varchar(255) not null);
+
+
+Create table GWUStudents ( email varchar(255));
+
+Create table login (emailid varchar(255) primary key, password varchar(255));
+
+Create table UserDetails (emailid varchar(255), fname varchar(255), lname varchar(255), address varchar(255), phone varchar(15));
